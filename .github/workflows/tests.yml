@@ -28,9 +28,17 @@ jobs:
           pip install pipenv
           python --version; pip --version; pipenv --version
           pipenv run pip install flask==${{ matrix.flask-version }}
+
+      - name: Instrument code
+        uses: AryazE/auto-dylin/instrument@main
+    
       - name: Run tests
         run: |
           make check
           make test
         env:
           RANDOM_SEED: 0
+        
+      - name: Report
+        if: always()
+        uses: AryazE/auto-dylin/report@main
