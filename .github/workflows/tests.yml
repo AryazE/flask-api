@@ -25,12 +25,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install pipenv
-          python --version; pip --version; pipenv --version
-          pipenv run pip install flask==${{ matrix.flask-version }}
+          python --version; pip --version;
+          pip install flask==${{ matrix.flask-version }}
 
       - name: Instrument code
         uses: AryazE/auto-dylin/instrument@main
+        with:
+            analysis-coverage: false
     
       - name: Run tests
         run: |

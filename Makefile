@@ -50,7 +50,7 @@ flake8: install
 
 # TESTS #######################################################################
 
-PYTEST := pipenv run pytest --cov=$(PACKAGE) --cov-report=html
+PYTEST := pytest -n 4
 COVERAGESPACE := pipenv run coveragespace
 
 RANDOM_SEED ?= $(shell date +%s)
@@ -58,7 +58,6 @@ RANDOM_SEED ?= $(shell date +%s)
 .PHONY: test
 test: install ## Run unit and integration tests
 	$(PYTEST) $(PACKAGE) $(NOSE_OPTIONS)
-	$(COVERAGESPACE) update overall
 
 .PHONY: read-coverage
 read-coverage:
